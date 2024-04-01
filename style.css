@@ -1,0 +1,53 @@
+/* Resetting default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling the header */
+header {
+    background-color: #333; /* Dark background color */
+    color: white; /* Text color */
+    padding: 10px 0; /* Top and bottom padding */
+}
+
+#menu {
+    display: flex;
+    justify-content: space-between; /* Spacing between logo and nav buttons */
+    align-items: center; /* Center items vertically */
+    padding: 0 20px; /* Left and right padding */
+}
+
+nav button {
+    background-color: transparent; /* Transparent background */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    cursor: pointer; /* Show pointer cursor on hover */
+    margin-left: 10px; /* Add spacing between buttons */
+}
+
+/* Styling the images */
+img {
+    max-width: 100%; /* Ensure images don't exceed their container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Styling the text section */
+.texto {
+    padding: 20px; /* Add padding around text */
+    text-align: center; /* Center align text */
+}
+
+/* Styling the absolute position text */
+.position-absolute {
+    position: absolute; /* Position element absolutely */
+    bottom: 10px; /* 10px from bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+}
+.image {
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
