@@ -1,0 +1,88 @@
+#!/usr/bin/node
+
+const readline = require('readline');
+
+class Student {
+  constructor(name, notes) {
+    this.name = name;
+    this.notes = notes;
+  }
+}
+
+function getStudentData()
+{
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  return new Promise((resolve, reject) => {
+    rl.question('Digite o nome do aluno (ou sair para terminar o programa): ', (name) => {
+      if (name.toLowerCase() === 'sair') {
+        rl.close();
+        printAll();
+      }
+
+      rl.question('\nDigite a primeira nota do aluno: ', (note1) => {
+        note1 = Number(note1);
+        if (isNaN(note1) || note1 < 0 || note1 > 10) {
+          console.error('Nota inválida digitada.');
+          rl.close();
+          reject();
+        }
+
+        rl.question('\nDigite a segunda nota do aluno: ', (note2) => {
+          note2 = Number(note2);
+          if (isNaN(note2) || note2 < 0 || note2 > 10) {
+            console.error('Nota inválida digitada.');
+            rl.close();
+            reject();
+          }
+
+          rl.question('\nDigite a terceira nota do aluno: ', (note3) => {
+            note3 = Number(note3);
+            if (isNaN(note3) || note3 < 0 || note3 > 10) {
+              console.error('Nota inválida digitada.');
+              rl.close();
+              reject();
+            }
+
+            rl.close();
+            resolve(new Student(name, [note1, note2, note3]));
+          });
+        });
+      });
+    });
+  });
+}
+
+let studentsNumber = 0;
+let students = [];
+
+function printAll()
+{
+  for (let i = 0; i < studentsNumber; ++i) {
+    console.log(`Nome do estudante: ${students[i].name}`);
+    console.log(`Média: ${(students[i].notes[0] + students[i].notes[1] + students[i].notes[2]) / 3}`);
+  }
+
+  process.exit(0);
+}
+
+async function main()
+{
+  while (studentsNumber < 10) { // Example condition: maximum of 10 students
+    try {
+      const student = await getStudentData();
+      students.push(student);
+      studentsNumber++;
+    } catch (error) {
+      console.error('Um erro ocorreu:', error);
+      return 1;
+    }
+  }
+
+  printAll();
+}
+
+main();
